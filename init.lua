@@ -47,10 +47,6 @@ vim.o.statusline = "%<%f %h%m%r%12.{v:lua.D()}%=%-14.(%l,%c%V%) %P"
 
 vim.cmd("colorscheme mellow")
 
--- For some reason, setting this in mellow.lua does not seem to work
-vim.cmd("hi DiffDelete guibg=NONE guifg=#bb0000")
-vim.cmd("hi diffRemoved guibg=NONE guifg=#bb0000")
-
 vim.keymap.set("c", "<C-p>", "<Up>")
 vim.keymap.set("c", "<C-n>", "<Down>")
 
@@ -145,7 +141,7 @@ ft("lua", function()
 	vim.bo.shiftwidth = 2
 end)
 
-vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, {})
+vim.api.nvim_create_user_command("Format", function() vim.lsp.buf.format() end, {})
 vim.api.nvim_create_user_command("W", "noautocmd w", {})
 
 -- LSP
@@ -180,7 +176,7 @@ if lspconfig_exists then
 	lsp_setup("cmake")
 	lsp_setup("marksman")
 	lsp_setup("pyright")
-  lsp_setup("rust_analyzer")
+	lsp_setup("rust_analyzer")
 	lsp_setup("sumneko_lua", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
 	lsp_setup("yamlls")
 end
@@ -189,7 +185,30 @@ end
 local treesitter_exists, treesitter = pcall(require, "nvim-treesitter.configs")
 if treesitter_exists then
 	treesitter.setup({
-		-- ensure_installed = "all",
+		ensure_installed = {
+			"bash",
+			"c",
+			"cmake",
+			"cpp",
+			"css",
+			"fish",
+			"gitcommit",
+			"help",
+			"html",
+			"javascript",
+			"json",
+			"lua",
+			"make",
+			"markdown",
+			"python",
+			"rust",
+			"toml",
+			"yaml",
+      "dockerfile",
+      "git_rebase",
+      "haskell",
+      "vim",
+		},
 		highlight = { enable = true },
 		indent = { enable = false },
 		textobjects = {
@@ -209,6 +228,11 @@ if treesitter_exists then
 	})
 end
 
+local treesitter_context_exists, treesitter_context = pcall(require, "treesitter-context")
+if treesitter_context_exists then
+	treesitter_context.setup()
+end
+
 -- Fugitive
 vim.keymap.set("n", "<leader><Space>", "<cmd>Git<CR><C-w>o")
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<CR>")
@@ -220,7 +244,6 @@ vim.keymap.set("n", "<leader>gfa", "<cmd>Git fetch --all<CR>")
 vim.keymap.set("n", "<leader>gPP", "<cmd>Git pull<CR>")
 vim.keymap.set("n", "<leader>gPr", "<cmd>Git pull --rebase<CR>")
 vim.keymap.set("n", "<leader>gpp", "<cmd>Git push<CR>")
-vim.keymap.set("n", "<leader>gpf", "<cmd>Git push --force<CR>")
 vim.keymap.set("n", "<leader>grr", ":Git rebase ")
 vim.keymap.set("n", "<leader>gri", ":Git rebase -i ")
 
@@ -280,8 +303,6 @@ end
 local cmp_exists, cmp = pcall(require, "cmp")
 local luasnip_exists, luasnip = pcall(require, "luasnip")
 if cmp_exists and luasnip_exists then
-	vim.api.nvim_create_user_command("CmpInfo", "CmpStatus", {})
-
 	cmp.setup({
 		mapping = cmp.mapping.preset.insert({
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -317,7 +338,7 @@ if cmp_exists and luasnip_exists then
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
-      { name = "calc" },
+			{ name = "calc" },
 		}, {
 			{ name = "buffer" },
 		}),
