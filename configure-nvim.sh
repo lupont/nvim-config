@@ -4,14 +4,28 @@ CFG_DIR="$HOME/.config/nvim"
 PLUGIN_DIR="$HOME/.local/share/nvim/site/pack/plugin/start/"
 REPO=https://github.com/lupont/nvim-config.git
 
-if [ -d "$CFG_DIR" ]; then
-    printf '%s already exists, exiting.\n' "$CFG_DIR"
-    exit 0
+PURGE=false
+
+if [ "$1" = purge ]; then
+    PURGE=true
 fi
 
-if [ -d "$PLUGIN_DIR" ]; then
-    printf '%s already exists, exiting.\n' "$PLUGIN_DIR"
-    exit 0
+if ! "$PURGE"; then
+    if [ -d "$CFG_DIR" ]; then
+        printf '%s already exists, exiting.\n' "$CFG_DIR"
+        exit 0
+    fi
+
+    if [ -d "$PLUGIN_DIR" ]; then
+        printf '%s already exists, exiting.\n' "$PLUGIN_DIR"
+        exit 0
+    fi
+else
+    printf 'Removing old config...\n'
+    (
+    set -x
+    rm -rf "$CFG_DIR" "$PLUGIN_DIR"
+    )
 fi
 
 git -C /tmp/ clone "$REPO"
