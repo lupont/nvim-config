@@ -15,8 +15,8 @@ local colors = {
 local hi = function(group, highlights)
   local bg = highlights["bg"] or "NONE"
   local fg = highlights["fg"] or "NONE"
-  local bold = highlights["bold"]
-  local strikethrough = highlights["strikethrough"]
+  local bold = highlights["bold"] or false
+  local strikethrough = highlights["strikethrough"] or false
 
   if #bg == 3 and string.match(bg, "^[0-9a-fA-F]") then
     bg = "#" .. bg .. bg
@@ -77,7 +77,7 @@ hi("MiniStatuslineModeNormal", { bg = "111", fg = "yellow" })
 hi("MiniStatuslineModeOther", {})
 hi("MiniStatuslineModeReplace", { bg = "reddish", fg = "111" })
 hi("MiniStatuslineModeVisual", { bg = "orange", fg = "111" })
-hi("Normal", { fg = "#000000", bold = true })
+hi("Normal", { fg = "ccc" })
 hi("Number", { fg = "aaa" })
 hi("Operator", { fg = "ddd" })
 hi("Pmenu", { bg = "darkgray", fg = "aaa" })
@@ -99,16 +99,16 @@ hi("Visual", { bg = "444" })
 hi("WinSeparator", { bg = "NONE", fg = "555" })
 hi("diffAdded", { fg = "green" })
 hi("diffRemoved", { fg = "red" })
+link("Character", "String")
+link("CmpItemAbbrMatchFuzzy", "CmpItemAbrrMatch")
 link("DiffAdd", "diffAdded")
 link("DiffDelete", "diffRemoved")
 link("GitSignsAdd", "diffAdded")
 link("GitSignsDelete", "diffRemoved")
-link("fugitiveStagedHeading", "diffAdded")
-link("fugitiveUnstagedHeading", "diffRemoved")
-link("Character", "String")
-link("CmpItemAbbrMatchFuzzy", "CmpItemAbrrMatch")
 link("LineNrBelow", "LineNrAbove")
 link("SpecialComment", "Comment")
+link("fugitiveStagedHeading", "diffAdded")
+link("fugitiveUnstagedHeading", "diffRemoved")
 link("fugitiveUntrackedHeading", "Macro")
 link("vimGroup", "Normal")
 link("vimHiGroup", "Normal")
@@ -140,3 +140,6 @@ link("TSInclude", "TSKeyword")
 link("TSKeywordOperator", "TSKeyword")
 link("TSKeywordReturn", "TSKeyword")
 link("TSMethod", "TSFunction")
+
+hi("@text.reference", { fg = "aaa" })
+link("@text", "Normal")
