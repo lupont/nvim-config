@@ -20,27 +20,31 @@ mkdir -p "$CFG_DIR" "$PLUGIN_DIR"
 
 mv /tmp/nvim-config/init.lua /tmp/nvim-config/colors /tmp/nvim-config/snippets "$CFG_DIR"
 
-git -C "$PLUGIN_DIR" clone https://github.com/dcampos/cmp-snippy.git
-git -C "$PLUGIN_DIR" clone https://github.com/dcampos/nvim-snippy.git
-git -C "$PLUGIN_DIR" clone https://github.com/echasnovski/mini.nvim.git
-git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/cmp-buffer.git
-git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/cmp-calc.git
-git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/cmp-nvim-lsp.git
-git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/cmp-nvim-lua.git
-git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/cmp-path.git
-git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/nvim-cmp.git
-git -C "$PLUGIN_DIR" clone https://github.com/jose-elias-alvarez/null-ls.nvim.git
-git -C "$PLUGIN_DIR" clone https://github.com/lewis6991/gitsigns.nvim.git
-git -C "$PLUGIN_DIR" clone https://github.com/neovim/nvim-lspconfig.git
-git -C "$PLUGIN_DIR" clone https://github.com/nvim-lua/plenary.nvim.git
-git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/nvim-treesitter-context.git
-git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git
-git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/nvim-treesitter.git
-git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/playground.git
-git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-commentary.git
-git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-fugitive.git
-git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-repeat.git
-git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-surround.git
+use() {
+    git -C "$PLUGIN_DIR" clone "https://github.com/$1"
+}
+
+use dcampos/cmp-snippy
+use dcampos/nvim-snippy
+use echasnovski/mini.nvim
+use hrsh7th/cmp-buffer
+use hrsh7th/cmp-calc
+use hrsh7th/cmp-nvim-lsp
+use hrsh7th/cmp-nvim-lua
+use hrsh7th/cmp-path
+use hrsh7th/nvim-cmp
+use jose-elias-alvarez/null-ls.nvim
+use lewis6991/gitsigns.nvim
+use neovim/nvim-lspconfig
+use nvim-lua/plenary.nvim
+use nvim-treesitter/nvim-treesitter
+use nvim-treesitter/nvim-treesitter-context
+use nvim-treesitter/nvim-treesitter-textobjects
+use nvim-treesitter/playground
+use tpope/vim-commentary
+use tpope/vim-fugitive
+use tpope/vim-repeat
+use tpope/vim-surround
 
 rm -rf /tmp/nvim-config/
 
