@@ -42,6 +42,7 @@ git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/nvim-treesitter.gi
 git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/playground.git
 git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-commentary.git
 git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-fugitive.git
+git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-repeat.git
 git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-surround.git
 
 rm -rf /tmp/nvim-config/
