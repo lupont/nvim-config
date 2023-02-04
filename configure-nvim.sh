@@ -30,13 +30,16 @@ fi
 
 git -C /tmp/ clone "$REPO"
 
-mkdir -p "$CFG_DIR/colors"
+mkdir -p "$CFG_DIR"
 mkdir -p "$PLUGIN_DIR"
 
-cp /tmp/nvim-config/init.lua "$CFG_DIR"
-cp /tmp/nvim-config/colors/mellow.lua "$CFG_DIR/colors"
+mv /tmp/nvim-config/init.lua "$CFG_DIR"
+mv /tmp/nvim-config/colors "$CFG_DIR"
+mv /tmp/nvim-config/snippets "$CFG_DIR"
 
-git -C "$PLUGIN_DIR" clone https://github.com/L3MON4D3/LuaSnip.git
+
+git -C "$PLUGIN_DIR" clone https://github.com/dcampos/cmp-snippy.git
+git -C "$PLUGIN_DIR" clone https://github.com/dcampos/nvim-snippy.git
 git -C "$PLUGIN_DIR" clone https://github.com/echasnovski/mini.nvim.git
 git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/cmp-buffer.git
 git -C "$PLUGIN_DIR" clone https://github.com/hrsh7th/cmp-calc.git
@@ -52,7 +55,6 @@ git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/nvim-treesitter-co
 git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git
 git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/nvim-treesitter.git
 git -C "$PLUGIN_DIR" clone https://github.com/nvim-treesitter/playground.git
-git -C "$PLUGIN_DIR" clone https://github.com/saadparwaiz1/cmp_luasnip.git
 git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-commentary.git
 git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-fugitive.git
 git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-surround.git

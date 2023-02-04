@@ -302,8 +302,8 @@ end
 
 -- nvim-cmp
 local cmp_exists, cmp = pcall(require, "cmp")
-local luasnip_exists, luasnip = pcall(require, "luasnip")
-if cmp_exists and luasnip_exists then
+local snippy_exists, snippy = pcall(require, "snippy")
+if cmp_exists and snippy_exists then
 	cmp.setup({
 		mapping = cmp.mapping.preset.insert({
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -311,8 +311,8 @@ if cmp_exists and luasnip_exists then
 			["<C-Space>"] = cmp.mapping.complete(),
 			["<C-c>"] = cmp.mapping.abort(),
 			["<C-e>"] = cmp.mapping(function(fallback)
-				if luasnip.expand_or_locally_jumpable() then
-					luasnip.expand_or_jump()
+				if snippy.can_expand_or_advance() then
+          snippy.expand_or_advance()
 				elseif cmp.visible() then
 					cmp.confirm({ select = true })
 				else
@@ -320,8 +320,8 @@ if cmp_exists and luasnip_exists then
 				end
 			end, { "i", "s" }),
 			["<C-y>"] = cmp.mapping(function(fallback)
-				if luasnip.jumpable(-1) then
-					luasnip.jump(-1)
+				if snippy.can_jump(-1) then
+          snippy.previous()
 				else
 					fallback()
 				end
@@ -330,14 +330,14 @@ if cmp_exists and luasnip_exists then
 
 		snippet = {
 			expand = function(args)
-				luasnip.lsp_expand(args.body)
+        snippy.expand_snippet(args.body)
 			end,
 		},
 
 		sources = cmp.config.sources({
 			{ name = "nvim_lsp" },
 			{ name = "nvim_lua" },
-			{ name = "luasnip" },
+			{ name = "snippy" },
 			{ name = "path" },
 			{ name = "calc" },
 		}, {
