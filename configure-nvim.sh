@@ -16,12 +16,9 @@ fi
 
 git -C /tmp/ clone "$REPO"
 
-mkdir -p "$CFG_DIR"
-mkdir -p "$PLUGIN_DIR"
+mkdir -p "$CFG_DIR" "$PLUGIN_DIR"
 
-mv /tmp/nvim-config/init.lua "$CFG_DIR"
-mv /tmp/nvim-config/colors "$CFG_DIR"
-mv /tmp/nvim-config/snippets "$CFG_DIR"
+mv /tmp/nvim-config/init.lua /tmp/nvim-config/colors /tmp/nvim-config/snippets "$CFG_DIR"
 
 git -C "$PLUGIN_DIR" clone https://github.com/dcampos/cmp-snippy.git
 git -C "$PLUGIN_DIR" clone https://github.com/dcampos/nvim-snippy.git
@@ -46,3 +43,5 @@ git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-repeat.git
 git -C "$PLUGIN_DIR" clone https://github.com/tpope/vim-surround.git
 
 rm -rf /tmp/nvim-config/
+
+nvim +'helptags ALL' -c q
