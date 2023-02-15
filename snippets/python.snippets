@@ -1,0 +1,23 @@
+snippet boilerplate "Basic structure of a script"
+		import argparse
+		import sys
+
+
+		def main() -> int:
+			args = parse_args()
+
+			${0:$VISUAL}
+
+			return 0
+
+
+		def parse_args() -> argparse.Namespace:
+			${1:parser} = argparse.ArgumentParser($2)
+
+			${1:parser}.add_argument($3)
+
+			return ${1:parser}.parse_args()
+
+
+		if __name__ == "__main__":
+			sys.exit(main())

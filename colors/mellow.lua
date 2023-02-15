@@ -1,43 +1,47 @@
 local colors = {
-  ["NONE"] = "NONE",
-  ["darkgray"] = "#161821",
-  ["darkergray"] = "#191919",
-  ["yellow"] = "#ffd600",
-  ["orange"] = "#ff8700",
-  ["maroon"] = "#be5f5f",
-  ["green"] = "#649e3f",
-  ["red"] = "#bb0000",
-  ["darkred"] = "#660000",
-  ["reddish"] = "#e41b63",
-  ["greenish"] = "#35ca93",
+	["NONE"] = "NONE",
+	["darkgray"] = "#161821",
+	["darkergray"] = "#191919",
+	["yellow"] = "#ffd600",
+	["orange"] = "#ff8700",
+	["maroon"] = "#be5f5f",
+	["green"] = "#649e3f",
+	["red"] = "#bb0000",
+	["darkred"] = "#660000",
+	["reddish"] = "#e41b63",
+	["greenish"] = "#35ca93",
+	["blue"] = "#be5f5f",
 }
 
 local hi = function(group, highlights)
-  local bg = highlights["bg"] or "NONE"
-  local fg = highlights["fg"] or "NONE"
-  local bold = highlights["bold"] or false
-  local strikethrough = highlights["strikethrough"] or false
+	local bg = highlights["bg"] or "NONE"
+	local fg = highlights["fg"] or "NONE"
+	local bold = highlights["bold"] or false
+	local strikethrough = highlights["strikethrough"] or false
 
-  if #bg == 3 and string.match(bg, "^[0-9a-fA-F]") then
-    bg = "#" .. bg .. bg
-  elseif string.match(bg, "^#") == nil then
-    bg = colors[bg]
-  end
+	if #bg == 3 and string.match(bg, "^[0-9a-fA-F]") then
+		bg = "#" .. bg .. bg
+	elseif string.match(bg, "^#") == nil then
+		bg = colors[bg]
+	end
 
-  if #fg == 3 and string.match(fg, "^[0-9a-fA-F]") then
-    fg = "#" .. fg .. fg
-    -- elseif string.match(fg, "^#") == nil then
-    -- fixing this makes everything not work. oof
-  elseif string.match(bg, "^#") == nil then
-    fg = colors[fg]
-  end
+	if #fg == 3 and string.match(fg, "^[0-9a-fA-F]") then
+		fg = "#" .. fg .. fg
+	elseif string.match(fg, "^#") == nil then
+		fg = colors[fg]
+	end
 
-  vim.api.nvim_set_hl(0, group, { fg = fg, bg = bg, bold = bold, strikethrough = strikethrough })
+	vim.api.nvim_set_hl(0, group, { fg = fg, bg = bg, bold = bold, strikethrough = strikethrough })
 end
 
 local link = function(source, target)
-  vim.api.nvim_set_hl(0, source, { link = target })
+	vim.api.nvim_set_hl(0, source, { link = target })
 end
+
+hi("@keyword.function", { fg = "yellow", bold = true })
+hi("@include", { fg = "yellow", bold = true })
+hi("@variable.builtin", { fg = "yellow" })
+hi("@operator", { fg = "blue" })
 
 hi("Boolean", { fg = "yellow", bold = true })
 hi("CmpItemAbbr", {})
@@ -94,7 +98,7 @@ hi("StorageClass", { fg = "yellow", bold = true })
 hi("String", { fg = "green" })
 hi("Title", { fg = "yellow" })
 hi("Todo", { bg = "maroon", fg = "eee" })
-hi("Type", { fg = "yellow" })
+hi("Type", { fg = "maroon" })
 hi("Visual", { bg = "444" })
 hi("WinSeparator", { bg = "NONE", fg = "555" })
 hi("diffAdded", { fg = "green" })
@@ -143,3 +147,62 @@ link("TSMethod", "TSFunction")
 
 hi("@text.reference", { fg = "aaa" })
 link("@text", "Normal")
+hi("@namespace", { fg = "yellow" })
+hi("@type.qualifier", { fg = "yellow", bold = true })
+hi("@repeat", { fg = "yellow", bold = true })
+hi("@constant.builtin", { fg = "yellow", bold = true })
+hi("@field", { fg = "777" })
+hi("@function.call", { fg = "888" })
+
+--[[
+    @text.literal      Comment
+    @text.reference    Identifier
+    @text.title        Title
+    @text.uri          Underlined
+    @text.underline    Underlined
+    @text.todo         Todo
+
+    @comment           Comment
+    @punctuation       Delimiter
+
+    @constant          Constant
+    @constant.builtin  Special
+    @constant.macro    Define
+    @define            Define
+    @macro             Macro
+    @string            String
+    @string.escape     SpecialChar
+    @string.special    SpecialChar
+    @character         Character
+    @character.special SpecialChar
+    @number            Number
+    @boolean           Boolean
+    @float             Float
+
+    @function          Function
+    @function.builtin  Special
+    @function.macro    Macro
+    @parameter         Identifier
+    @method            Function
+    @field             Identifier
+    @property          Identifier
+    @constructor       Special
+
+    @conditional       Conditional
+    @repeat            Repeat
+    @label             Label
+    @operator          Operator
+    @keyword           Keyword
+    @exception         Exception
+
+    @variable          Identifier
+    @type              Type
+    @type.definition   Typedef
+    @storageclass      StorageClass
+    @structure         Structure
+    @namespace         Identifier
+    @include           Include
+    @preproc           PreProc
+    @debug             Debug
+    @tag               Tag
+--]]
