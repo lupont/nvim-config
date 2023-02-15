@@ -177,7 +177,7 @@ if lspconfig_exists then
 	lsp_setup("marksman")
 	lsp_setup("pyright")
 	lsp_setup("rust_analyzer")
-	lsp_setup("sumneko_lua", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+	lsp_setup("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
 	lsp_setup("yamlls")
 end
 
